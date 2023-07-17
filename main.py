@@ -1,5 +1,5 @@
 from db import db_session
-import config
+from data import config
 from db.tasks import Tasks
 from datetime import datetime
 
@@ -19,13 +19,7 @@ def create_task(massage: str):
 # create_task("11.09.23 w qd wdq dwf w12.,<рцывц423 ?")
 # create_task("11.09 w qd wdq dwf w12.,<рцывц423 ?")
 
-def main():
-    db_session.global_init(
-        username=config.USERNAME,
-        password=config.PASSWORD,
-        host=config.HOST,
-        database_name=config.DATABASE_NAME
-    )
+
     # t1 = Tasks(
     #     task_text="1 дело",
     #     task_date=datetime(year=2023, month=7, day=20, hour=12, minute=0)
@@ -39,6 +33,3 @@ def main():
     # r = active_session.query(Tasks).filter(Tasks.task_date >= datetime(year=2020, month=1, day=1))
     # print(r.count())
 
-
-if __name__ == "__main__":
-    main()
