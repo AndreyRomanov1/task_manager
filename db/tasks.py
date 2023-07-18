@@ -9,3 +9,6 @@ class Tasks(SqlAlchemyBase):
     task_text = sqlalchemy.Column(sqlalchemy.String(1000), nullable=False)
     task_author = sqlalchemy.Column(sqlalchemy.Integer)
     task_date = sqlalchemy.Column(sqlalchemy.DateTime, nullable=False)
+
+    def __repr__(self):
+        return f"  {self.task_date.strftime('%H:%M')} - {self.task_text}"
