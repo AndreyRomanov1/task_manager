@@ -3,15 +3,18 @@ from datetime import datetime, timedelta
 from aiogram import types
 
 from loader import dp
-from utils.task_services import get_tasks_of_specified_day
+from utils.task_services import create_message_for_tasks_of_day, get_all_tasks_for_period_from_db
 
 
 async def tasks_of_specified_day_base_handler(message: types.Message, date: datetime):
-    date = date.replace(minute=0, hour=0, second=0, microsecond=0)
-    tasks = await get_tasks_of_specified_day(date, task_author=message.from_user.id)
+    tasks = await get_all_tasks_for_period_from_db(
+        task_author=message.from_user.id,
+        start_date_of_period=date,
+        period_length_in_days=1
+    )
     if tasks:
-        str_tasks = "\n".join(list(map(str, tasks)))
-        await message.answer(f"Задачи на {date.strftime('%d.%m.%Y')}:\n{str_tasks}")
+        answer_message = await create_message_for_tasks_of_day(tasks_of_days=tasks, date=date)
+        await message.answer(answer_message)
     else:
         await message.answer("На указанную дату задач нет")
 
