@@ -19,9 +19,6 @@ if __name__ == '__main__':
     from handlers import dp
 
     db_session.global_init(
-        username=config.DATABASE_USERNAME,
-        password=config.DATABASE_PASSWORD,
-        host=config.DATABASE_HOST,
-        database_name=config.DATABASE_NAME
+        sql_type="sqlite"
     )
     executor.start_polling(dp, on_startup=on_startup)

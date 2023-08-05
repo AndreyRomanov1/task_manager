@@ -35,8 +35,8 @@ async def get_all_tasks_for_period_from_db(task_author: int, start_date_of_perio
 
 async def distribution_of_all_tasks_by_day(all_tasks: list[Tasks], start_date_of_period: datetime,
                                            period_length_in_days: int) -> list[list[Tasks]]:
-    start_date_of_period = start_date_of_period.replace(minute=0, hour=0, second=0, microsecond=0)
     """Распределяет список задач на список списков задач по дням"""
+    start_date_of_period = start_date_of_period.replace(minute=0, hour=0, second=0, microsecond=0)
     tasks_for_period = [[] for _ in range(period_length_in_days)]
     days_from_start_period, i = 0, 0
     while i < len(all_tasks):
